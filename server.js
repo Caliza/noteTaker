@@ -28,22 +28,7 @@ app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT} 🚀`)
 );
 
-router.delete('/notes/:id', (req, res) => {
-  const deleteId = req.params.id
-  fs.readFile('db/db.json', (err, data) => {
-    if (err) throw err
-    const db = JSON.parse(data)
-    const filterNotes = db.filter(note => {
-      console.log(note.id, deleteId)
-      return note.id !== deleteId
-    })
-    console.log('filterNotes', filterNotes)
-    fs.writeFile('db/db.json', JSON.stringify(filterNotes), err => {
-      if (err) throw err
-      res.send(filterNotes)
-    })
-  })``
-})
+
 
 // app.delete('/api/notes/:id', (req, res) => {
 //   const deleteId = req.params.id;
