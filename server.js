@@ -1,4 +1,5 @@
 const express = require('express');
+const { fstat } = require('fs');
 const path = require('path');
 const api = require('./routes/apiRoutes.js');
 
@@ -26,3 +27,20 @@ app.get('/notes', (req, res) =>
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT} 🚀`)
 );
+
+app.delete('/api/otes/:id', (req, res) => {
+  const deleteId = req.params.id;
+  fs.promises.readFile('db/db.json')
+  .then((data) => {
+    const db = JSON.parse(data);
+    const filterNotes = db.filter((note) => {
+      console.log(note.id, deleteId);
+      return note.id !== deleteId;
+    })
+    console.log('filterNotes', filterNotes);
+    return fs.promises.writeFile('db/db.json', JSON.stringify(filterNotes))
+  })
+  .then((data) => {
+    res.send(data);
+  })
+})
