@@ -1,5 +1,5 @@
 const express = require('express');
-const { fstat } = require('fs');
+const fs = require('fs');
 const path = require('path');
 const api = require('./routes/apiRoutes.js');
 
@@ -28,7 +28,7 @@ app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT} 🚀`)
 );
 
-app.delete('/api/otes/:id', (req, res) => {
+app.delete('/api/notes/:id', (req, res) => {
   const deleteId = req.params.id;
   fs.promises.readFile('db/db.json')
   .then((data) => {
