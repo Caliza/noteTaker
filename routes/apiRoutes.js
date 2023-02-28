@@ -18,7 +18,7 @@ router.post('/notes', (req, res) => {
     const newNote = {
       title,
       text,
-      _id: uuid(),
+      id: uuid(),
       //remove underscore for extracredit.
     };
 
